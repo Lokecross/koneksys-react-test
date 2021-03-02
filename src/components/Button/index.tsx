@@ -6,8 +6,8 @@ interface ButtonProps extends HTMLProps<HTMLButtonElement> {
   children: string;
 }
 
-const Button = ({ children }: ButtonProps) => {
-  return <Container>{children}</Container>;
+const Button = ({ children, onClick }: ButtonProps) => {
+  return <Container onClick={onClick}>{children}</Container>;
 };
 
 export default Button;
