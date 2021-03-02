@@ -20,7 +20,7 @@ import {
 
 const ModalContent = () => {
   const [disabled, setDisabled] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
 
   const [step, setStep] = useState<number>(1);
 

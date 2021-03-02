@@ -1,60 +1,70 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import Papa from 'papaparse';
+import { FaTimes, FaTimesCircle } from 'react-icons/fa';
+
+import UploadButton from 'components/UploadButton';
 
 import {
   Container,
-  InputFile,
-  UploadButton,
-  Upload,
   Description,
+  ErrorField,
+  ErrorText,
+  ErrorLabel,
+  ErrorLabelText,
 } from './styles';
+
+type CsvJsonProps = Array<{ [U: string]: string }>;
 
 type UploadContentProps = {
   onChange(disabled: boolean, error: boolean): void;
 };
 
 const UploadContent = ({ onChange }: UploadContentProps) => {
-  const [disabled, setDisabled] = useState<boolean>(false);
+  const [file, setFile] = useState<CsvJsonProps | null>(null);
+  const [filename, setFilename] = useState<string>('');
   const [error, setError] = useState<boolean>(false);
-
-  const toggleError = useCallback(() => {
-    setError(!error);
-    setDisabled(!error);
-  }, [error]);
-
-  console.log(toggleError);
-
-  useEffect(() => {
-    onChange(disabled, error);
-  }, [disabled, error, onChange]);
-
-  const handleChange = (files: FileList | null) => {
-    if (files) {
-      Papa.parse(files[0], {
-        complete: result => {
-          const { data } = result;
-          console.log(data);
-        },
-        header: true,
-      });
-    }
-  };
 
   return (
     <Container>
       <div style={{ height: 23 }} />
-      <Upload>
-        <InputFile
-          id="upload"
-          hidden
-          type="file"
-          onChange={e => handleChange(e.target.files)}
-        />
-        <UploadButton htmlFor="upload">Select File</UploadButton>
-      </Upload>
 
-      <Description>File must be in .csv format</Description>
+      {error ? (
+        <ErrorField>
+          <ErrorText>{filename}</ErrorText>
+          <FaTimes size={16} color="#FF0000" />
+        </ErrorField>
+      ) : (
+        <UploadButton
+          onChange={(newFile, newFilename, newError) => {
+            setFile(newFile);
+            setFilename(newFilename);
+            setError(newError);
+
+            onChange(newError, newError);
+          }}
+        >
+          Select File
+        </UploadButton>
+      )}
+
+      {error ? (
+        <div>
+          <div style={{ height: 18 }} />
+          <ErrorLabel>
+            <FaTimesCircle size={16} color="#FF0000" />
+            <ErrorLabelText>Missing Value</ErrorLabelText>
+          </ErrorLabel>
+          <div style={{ height: 10 }} />
+        </div>
+      ) : (
+        <div style={{ height: 28 }} />
+      )}
+
+      <Description>
+        {error
+          ? 'One of records has a missing value for one of the columns. Please ensure your .csv has complete information.'
+          : 'File must be in .csv format'}
+      </Description>
     </Container>
   );
 };

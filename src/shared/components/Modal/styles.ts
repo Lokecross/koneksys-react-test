@@ -23,6 +23,7 @@ export const Popup = styled.div`
   box-shadow: 0px 9px 26px #0000003d;
   border-radius: 16px;
   z-index: 2;
+  width: min-content;
 `;
 
 export const OutClick = styled.div`

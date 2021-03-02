@@ -63,6 +63,7 @@ export const BadgeText = styled.div`
   font-size: 13px;
   font-weight: 500;
   color: var(--textColor);
+  white-space: nowrap;
 `;
 
 export const BadgeRight = styled.div`
