@@ -2,11 +2,11 @@ import { HTMLProps } from 'react';
 
 import { Container } from './styles';
 
-interface IButton extends HTMLProps<HTMLButtonElement> {
+interface ButtonProps extends HTMLProps<HTMLButtonElement> {
   children: string;
 }
 
-const Button = ({ children }: IButton) => {
+const Button = ({ children }: ButtonProps) => {
   return <Container>{children}</Container>;
 };
 
