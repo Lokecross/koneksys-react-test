@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { FaTimes, FaTimesCircle } from 'react-icons/fa';
 
 import UploadButton from 'components/UploadButton';
+
+import { selectUpload } from 'store/features/upload/uploadSlice';
 
 import {
   Container,
@@ -13,41 +15,23 @@ import {
   ErrorLabelText,
 } from './styles';
 
-type CsvJsonProps = Array<{ [U: string]: string }>;
-
-type UploadContentProps = {
-  onChange(disabled: boolean, error: boolean): void;
-};
-
-const UploadContent = ({ onChange }: UploadContentProps) => {
-  const [file, setFile] = useState<CsvJsonProps | null>(null);
-  const [filename, setFilename] = useState<string>('');
-  const [error, setError] = useState<boolean>(false);
+const UploadContent = () => {
+  const upload = useSelector(selectUpload);
 
   return (
     <Container>
       <div style={{ height: 23 }} />
 
-      {error ? (
+      {upload.error ? (
         <ErrorField>
-          <ErrorText>{filename}</ErrorText>
+          <ErrorText>{upload.filename}</ErrorText>
           <FaTimes size={16} color="#FF0000" />
         </ErrorField>
       ) : (
-        <UploadButton
-          onChange={(newFile, newFilename, newError) => {
-            setFile(newFile);
-            setFilename(newFilename);
-            setError(newError);
-
-            onChange(newError, newError);
-          }}
-        >
-          Select File
-        </UploadButton>
+        <UploadButton>Select File</UploadButton>
       )}
 
-      {error ? (
+      {upload.error ? (
         <div>
           <div style={{ height: 18 }} />
           <ErrorLabel>
@@ -61,7 +45,7 @@ const UploadContent = ({ onChange }: UploadContentProps) => {
       )}
 
       <Description>
-        {error
+        {upload.error
           ? 'One of records has a missing value for one of the columns. Please ensure your .csv has complete information.'
           : 'File must be in .csv format'}
       </Description>

@@ -1,15 +1,18 @@
 import Papa from 'papaparse';
+import { useDispatch } from 'react-redux';
+import { uploadFinish } from 'store/features/upload/uploadSlice';
 
 import { Container, InputFile, UploadLabel } from './styles';
 
 type CsvJsonProps = Array<{ [U: string]: string }>;
 
 type UploadContentProps = {
-  onChange(file: CsvJsonProps, filename: string, error: boolean): void;
   children: JSX.Element | string;
 };
 
-const UploadFile = ({ onChange, children }: UploadContentProps) => {
+const UploadFile = ({ children }: UploadContentProps) => {
+  const dispatch = useDispatch();
+
   const validateFile = (jsonFile: CsvJsonProps): { valid: boolean } => {
     let valid = true;
 
@@ -29,9 +32,21 @@ const UploadFile = ({ onChange, children }: UploadContentProps) => {
       Papa.parse(files[0], {
         complete: ({ data }: { data: CsvJsonProps }) => {
           if (validateFile(data).valid) {
-            onChange(data, files[0].name, false);
+            dispatch(
+              uploadFinish({
+                file: data,
+                filename: files[0].name,
+                error: false,
+              }),
+            );
           } else {
-            onChange(data, files[0].name, true);
+            dispatch(
+              uploadFinish({
+                file: data,
+                filename: files[0].name,
+                error: true,
+              }),
+            );
           }
         },
         header: true,

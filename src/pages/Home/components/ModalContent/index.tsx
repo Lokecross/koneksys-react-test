@@ -1,7 +1,12 @@
 import { useCallback, useMemo, useState } from 'react';
 
+import { useSelector } from 'react-redux';
+
 import Steps from 'components/Steps';
 import Button from 'components/Button';
+import UploadButton from 'components/UploadButton';
+
+import { selectUpload } from 'store/features/upload/uploadSlice';
 
 import UploadContent from './components/UploadContent';
 import PlayerContent from './components/PlayerContent';
@@ -19,8 +24,7 @@ import {
 } from './styles';
 
 const ModalContent = () => {
-  const [disabled, setDisabled] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(false);
+  const upload = useSelector(selectUpload);
 
   const [step, setStep] = useState<number>(1);
 
@@ -55,20 +59,13 @@ const ModalContent = () => {
 
   return (
     <Container>
-      <Steps step={step} error={error} />
+      <Steps step={step} error={upload.error} />
 
       <Body>
         <Content>
           <Title>{title}</Title>
           <Scrollable>
-            {step === 1 && (
-              <UploadContent
-                onChange={(dis, err) => {
-                  setDisabled(dis);
-                  setError(err);
-                }}
-              />
-            )}
+            {step === 1 && <UploadContent />}
             {step === 2 && <PlayerContent />}
             {step === 3 && <FavoriteContent />}
             {step === 4 && <SummaryContent />}
@@ -77,9 +74,13 @@ const ModalContent = () => {
 
         <Buttons>
           {step > 1 && <Back onClick={previousStep}>Back</Back>}
-          <Button onClick={nextStep} disabled={disabled}>
-            Continue
-          </Button>
+          {upload.error ? (
+            <UploadButton>Re-Upload File</UploadButton>
+          ) : (
+            <Button onClick={nextStep} disabled={upload.error || !upload.file}>
+              Continue
+            </Button>
+          )}
         </Buttons>
       </Body>
     </Container>

@@ -3,8 +3,9 @@
     "baseUrl": ".",
     "paths": {
       "components/*": ["./src/shared/components/*"],
-      "styles/*": ["./src/shared/styles/*"],
-      "pages/*": ["./src/pages/*"]
+      "styles/*": ["./src/styles/*"],
+      "pages/*": ["./src/pages/*"],
+      "store/*": ["./src/store/*"]
     }
   }
 }
