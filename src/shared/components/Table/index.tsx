@@ -9,25 +9,29 @@ interface TableProps {
 const Table = ({ content }: TableProps) => {
   return (
     <Container>
-      <tr>
-        {Object.keys(content[0]).map(key => (
-          <Th key={key}>{key}</Th>
-        ))}
-      </tr>
-      <tr>
-        {Object.keys(content[0]).map(key => (
-          <Td key={key} isActive>
-            {content[0][key]}
-          </Td>
-        ))}
-      </tr>
-      {content.slice(1).map(item => (
+      <thead>
         <tr>
-          {Object.keys(item).map(key => (
-            <Td key={key}>{item[key]}</Td>
+          {Object.keys(content[0]).map(key => (
+            <Th key={key}>{key}</Th>
           ))}
         </tr>
-      ))}
+      </thead>
+      <tbody>
+        <tr>
+          {Object.keys(content[0]).map(key => (
+            <Td key={key} isActive>
+              {content[0][key]}
+            </Td>
+          ))}
+        </tr>
+        {content.slice(1).map(item => (
+          <tr key={JSON.stringify(item)}>
+            {Object.keys(item).map(key => (
+              <Td key={key}>{item[key]}</Td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
     </Container>
   );
 };

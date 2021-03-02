@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import Button from 'components/Button';
 import Modal, { ModalRefProps } from 'components/Modal';
 
-import ModalContent from './components/ModalContent';
+import ModalContent from '../ModalContent';
 
 import { Container, Title } from './styles';
 

@@ -17,7 +17,7 @@ export type ModalRefProps = {
   toggleModal(): void;
 };
 
-export type ModalProps = {
+type ModalProps = {
   innerRef: Ref<ModalRefProps>;
   children: JSX.Element | string;
   title: string;

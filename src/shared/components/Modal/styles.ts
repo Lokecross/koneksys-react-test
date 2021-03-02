@@ -14,7 +14,7 @@ export const Position = styled.div`
   justify-content: center;
   height: 100%;
   backdrop-filter: blur(3px);
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
   position: relative;
 `;
 
