@@ -1,6 +1,15 @@
 import { useImperativeHandle, Ref, useState, useCallback } from 'react';
 
-import { Container, Position, Popup, OutClick } from './styles';
+import { CgClose } from 'react-icons/cg';
+
+import {
+  Container,
+  Position,
+  Popup,
+  OutClick,
+  HeadModal,
+  Title,
+} from './styles';
 
 export type ModalRefProps = {
   openModal(): void;
@@ -11,9 +20,10 @@ export type ModalRefProps = {
 export type ModalProps = {
   innerRef: Ref<ModalRefProps>;
   children: JSX.Element | string;
+  title: string;
 };
 
-const Modal = ({ innerRef, children }: ModalProps) => {
+const Modal = ({ innerRef, children, title }: ModalProps) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const openModal = useCallback(() => {
@@ -37,7 +47,18 @@ const Modal = ({ innerRef, children }: ModalProps) => {
   return open ? (
     <Container>
       <Position>
-        <Popup>{children}</Popup>
+        <Popup>
+          <HeadModal>
+            <Title>{title}</Title>
+            <CgClose
+              size={24}
+              onClick={closeModal}
+              style={{ cursor: 'pointer' }}
+            />
+          </HeadModal>
+
+          {children}
+        </Popup>
         <OutClick onClick={closeModal} />
       </Position>
     </Container>

@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.table`
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 10px;
-  margin-top: -10px;
+  border-spacing: 0 8px;
+  margin-top: -8px;
 `;
 
 export const Th = styled.th`

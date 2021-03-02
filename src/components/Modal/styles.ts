@@ -33,3 +33,16 @@ export const OutClick = styled.div`
   bottom: 0;
   z-index: 1;
 `;
+
+export const HeadModal = styled.div`
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const Title = styled.div`
+  font-size: 22px;
+  color: #1f1f1f;
+  font-weight: 500;
+`;
