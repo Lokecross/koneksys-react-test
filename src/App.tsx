@@ -1,6 +1,6 @@
-import Home from './pages/Home';
+import GlobalStyles from 'styles/global';
 
-import GlobalStyles from './styles/global';
+import Home from 'pages/Home';
 
 const App = () => {
   return (

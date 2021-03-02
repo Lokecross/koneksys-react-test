@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
-import Button from '../../../../components/Button';
-import Modal, { ModalRefProps } from '../../../../components/Modal';
+import Button from 'components/Button';
+import Modal, { ModalRefProps } from 'components/Modal';
 
 import ModalContent from './components/ModalContent';
 
