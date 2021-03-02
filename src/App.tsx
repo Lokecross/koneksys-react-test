@@ -5,8 +5,8 @@ import GlobalStyles from './styles/global';
 const App = () => {
   return (
     <>
-      <Home />
       <GlobalStyles />
+      <Home />
     </>
   );
 };
