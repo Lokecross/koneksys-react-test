@@ -28,7 +28,7 @@ const TableEditable = ({ content }: TableEditableProps) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState<string | null>(null);
 
-  const options = ['Active', 'Injuried', 'Practice', 'Suspended'];
+  const options = ['Active', 'Injured', 'Practice', 'Suspended'];
 
   return (
     <Container>
@@ -75,8 +75,10 @@ const TableEditable = ({ content }: TableEditableProps) => {
                   {options
                     .filter(
                       status =>
-                        status !==
-                        item[Object.keys(item)[Object.keys(item).length - 1]],
+                        status.toLowerCase() !==
+                        item[
+                          Object.keys(item)[Object.keys(item).length - 1]
+                        ].toLowerCase(),
                     )
                     .map(status => (
                       <SelectItem

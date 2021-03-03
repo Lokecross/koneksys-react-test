@@ -36,25 +36,43 @@ const SummaryContent = () => {
         <Box>
           <Label>Active</Label>
           <Value>
-            {upload.file?.filter(item => item.Status === 'Active').length}
+            {
+              upload.file?.filter(
+                item => item.Status.toLowerCase() === 'active',
+              ).length
+            }
           </Value>
         </Box>
         <Box>
           <Label>Injured</Label>
           <Value>
-            {upload.file?.filter(item => item.Status === 'Active').length}
+            {
+              upload.file?.filter(
+                item =>
+                  item.Status.toLowerCase() === 'injured' ||
+                  item.Status.toLowerCase() === 'injuried',
+              ).length
+            }
           </Value>
         </Box>
         <Box>
           <Label>Practice Squad</Label>
           <Value>
-            {upload.file?.filter(item => item.Status === 'Practice').length}
+            {
+              upload.file?.filter(
+                item => item.Status.toLowerCase() === 'practice',
+              ).length
+            }
           </Value>
         </Box>
         <Box>
           <Label>Suspended</Label>
           <Value>
-            {upload.file?.filter(item => item.Status === 'Suspended').length}
+            {
+              upload.file?.filter(
+                item => item.Status.toLowerCase() === 'suspended',
+              ).length
+            }
           </Value>
         </Box>
       </Line>
