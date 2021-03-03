@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 import { selectUpload } from 'store/features/upload/uploadSlice';
 
-import TableEditable from 'components/TableEditable';
+import TableEditable from './components/TableEditable';
 
 import { Container } from './styles';
 

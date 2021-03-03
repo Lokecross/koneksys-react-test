@@ -14,18 +14,19 @@ export const Th = styled.th`
   font-weight: 300;
   font-size: 12px;
   background: #fff;
-  padding-bottom: 4px;
+  padding-bottom: 10px;
   position: sticky;
   top: 0;
   z-index: 2;
 `;
 
 type TdProps = {
-  isHidden?: boolean;
+  isActive?: boolean;
 };
 
 export const Td = styled.td<TdProps>`
-  border: solid 1px #e8e8e8;
+  border: solid 1px ${props => (props.isActive ? '#ECBA17' : '#e8e8e8')};
+  background: ${props => (props.isActive ? '#F8F8F8' : '#fff')};
   border-style: solid none;
   height: 40px;
   padding: 0 16px;
@@ -41,51 +42,44 @@ export const Td = styled.td<TdProps>`
   }
 
   &:last-child {
-    border-style: ${props => (props.isHidden ? 'none' : 'solid')};
+    border-right-style: solid;
     border-bottom-right-radius: 8px;
     border-top-right-radius: 8px;
-    cursor: pointer;
   }
-`;
-
-export const SelectContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const SelectText = styled.div`
-  color: #1f1f1f;
-  font-size: 14px;
-  font-weight: 500;
 `;
 
 export const Tbody = styled.tbody``;
 
 export const Thead = styled.thead``;
 
-export const Tr = styled.tr``;
-
-export const Teste = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #fff;
-  width: 100%;
-  border: 1px solid #859be3;
-  border-top-right-radius: 8px;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  min-height: 100%;
-  z-index: 1;
-  box-shadow: 0px 3px 6px #00000029;
+export const Tr = styled.tr`
+  cursor: pointer;
 `;
 
-export const SelectItem = styled.div`
+export const RadioContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  height: 38px;
-  cursor: pointer;
+`;
+
+export const RadioText = styled.div`
+  color: #1f1f1f;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 22px;
+`;
+
+type RadioProps = {
+  isActive?: boolean;
+};
+
+export const Radio = styled.div<RadioProps>`
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background: ${props => (props.isActive ? '#2F54D0' : '#fff')};
+  border: 1px solid ${props => (props.isActive ? '#2F54D0' : '#d1d1d1')};
+  box-shadow: 0px 1px 3px #00000029;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

@@ -8,6 +8,7 @@ interface UploadState {
   filename: string;
   error: boolean;
   name: string;
+  favorite: string;
 }
 
 const initialState: UploadState = {
@@ -15,6 +16,7 @@ const initialState: UploadState = {
   filename: '',
   error: false,
   name: '',
+  favorite: '',
 };
 
 export const uploadSlice = createSlice({
@@ -48,10 +50,18 @@ export const uploadSlice = createSlice({
         state.file[index as number].Status = action.payload.status;
       }
     },
+    changeFavorite: (state, action: PayloadAction<string>) => {
+      state.favorite = action.payload;
+    },
   },
 });
 
-export const { uploadFinish, changeName, changeStatus } = uploadSlice.actions;
+export const {
+  uploadFinish,
+  changeName,
+  changeStatus,
+  changeFavorite,
+} = uploadSlice.actions;
 
 export const selectUpload = (state: RootState) => state.upload;
 
