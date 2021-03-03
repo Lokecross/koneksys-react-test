@@ -10,4 +10,5 @@ export const Container = styled.input`
   color: #000;
   width: 100%;
   max-width: 323px;
+  -webkit-appearance: none;
 `;

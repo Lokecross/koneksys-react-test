@@ -18,10 +18,12 @@ export const Content = styled.div`
   flex-direction: column;
 `;
 
-export const Scrollable = styled.div`
+export const Contents = styled.div`
   flex: 1;
   display: grid;
   overflow-y: scroll;
+  padding-right: 3px;
+  margin-top: 8px;
 
   ::-webkit-scrollbar {
     width: 4px;

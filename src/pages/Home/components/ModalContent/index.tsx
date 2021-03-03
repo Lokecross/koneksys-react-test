@@ -19,8 +19,8 @@ import {
   Body,
   Buttons,
   Content,
-  Scrollable,
   Title,
+  Contents,
 } from './styles';
 
 const ModalContent = () => {
@@ -64,12 +64,12 @@ const ModalContent = () => {
       <Body>
         <Content>
           <Title>{title}</Title>
-          <Scrollable>
+          <Contents>
             {step === 1 && <UploadContent />}
             {step === 2 && <PlayerContent />}
             {step === 3 && <FavoriteContent />}
             {step === 4 && <SummaryContent />}
-          </Scrollable>
+          </Contents>
         </Content>
 
         <Buttons>
