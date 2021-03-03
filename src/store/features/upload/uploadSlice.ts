@@ -7,12 +7,14 @@ interface UploadState {
   file: FileProps | null;
   filename: string;
   error: boolean;
+  name: string;
 }
 
 const initialState: UploadState = {
   file: null,
   filename: '',
   error: false,
+  name: '',
 };
 
 export const uploadSlice = createSlice({
@@ -31,10 +33,13 @@ export const uploadSlice = createSlice({
       state.filename = action.payload.filename;
       state.error = action.payload.error;
     },
+    changeName: (state, action: PayloadAction<string>) => {
+      state.name = action.payload;
+    },
   },
 });
 
-export const { uploadFinish } = uploadSlice.actions;
+export const { uploadFinish, changeName } = uploadSlice.actions;
 
 export const selectUpload = (state: RootState) => state.upload;
 

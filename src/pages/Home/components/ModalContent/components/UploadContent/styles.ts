@@ -20,11 +20,11 @@ export const Description = styled.div`
   font-weight: 400;
 `;
 
-export const ErrorField = styled.div`
+export const Filename = styled.div`
   background: #fff;
   border: 1px solid #e8e8e8;
   border-radius: 8px;
-  padding: 8px 16px;
+  padding: 8px 13px 8px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -32,7 +32,7 @@ export const ErrorField = styled.div`
   min-width: 323px;
 `;
 
-export const ErrorText = styled.div`
+export const FilenameText = styled.div`
   font-size: 14px;
   font-weight: 500;
   color: #000;
@@ -50,4 +50,10 @@ export const ErrorLabelText = styled.div`
   color: #000;
   margin-left: 8px;
   white-space: nowrap;
+`;
+
+export const Title = styled.div`
+  color: #000000;
+  font-size: 14px;
+  font-weight: 500;
 `;

@@ -77,7 +77,10 @@ const ModalContent = () => {
           {upload.error ? (
             <UploadButton>Re-Upload File</UploadButton>
           ) : (
-            <Button onClick={nextStep} disabled={upload.error || !upload.file}>
+            <Button
+              onClick={nextStep}
+              disabled={upload.error || !upload.file || !upload.name}
+            >
               Continue
             </Button>
           )}
