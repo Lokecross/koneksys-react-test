@@ -1,24 +1,28 @@
+import { useSelector } from 'react-redux';
+
+import { selectUpload } from 'store/features/upload/uploadSlice';
+
 import Badge from 'components/Badge';
 
 import { Container } from './styles';
 
 type StepsProps = {
-  step?: number;
   error?: boolean;
 } & typeof defaultProps;
 
 const defaultProps = {
-  step: 0,
   error: false,
 };
 
-const Steps = ({ step, error }: StepsProps) => {
+const Steps = ({ error }: StepsProps) => {
+  const upload = useSelector(selectUpload);
+
   return (
     <Container>
       <Badge
         icon="upload"
         position="left"
-        active={step > 0}
+        active={upload.step > 0}
         error={error}
         style={{ zIndex: 4 }}
       >
@@ -26,7 +30,7 @@ const Steps = ({ step, error }: StepsProps) => {
       </Badge>
       <Badge
         icon="football"
-        active={step > 1}
+        active={upload.step > 1}
         error={error}
         style={{ marginLeft: -4, zIndex: 3 }}
       >
@@ -34,7 +38,7 @@ const Steps = ({ step, error }: StepsProps) => {
       </Badge>
       <Badge
         icon="star"
-        active={step > 2}
+        active={upload.step > 2}
         error={error}
         style={{ marginLeft: -4, zIndex: 2 }}
       >
@@ -43,7 +47,7 @@ const Steps = ({ step, error }: StepsProps) => {
       <Badge
         icon="check"
         position="right"
-        active={step > 3}
+        active={upload.step > 3}
         error={error}
         style={{ marginLeft: -4, zIndex: 1 }}
       >

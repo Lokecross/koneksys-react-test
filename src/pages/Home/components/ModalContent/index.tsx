@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,8 +9,9 @@ import UploadButton from 'components/UploadButton';
 import { teamConfirm } from 'store/features/team/teamSlice';
 import {
   clearUpload,
+  nextStep,
+  prevStep,
   selectUpload,
-  toggleModal,
 } from 'store/features/upload/uploadSlice';
 
 import UploadContent from './components/UploadContent';
@@ -33,36 +34,26 @@ const ModalContent = () => {
 
   const upload = useSelector(selectUpload);
 
-  const [step, setStep] = useState<number>(1);
-
-  const nextStep = useCallback(() => {
-    setStep(step + 1);
-  }, [step]);
-
-  const previousStep = useCallback(() => {
-    setStep(step - 1);
-  }, [step]);
-
   const title = useMemo(() => {
-    if (step === 1) return 'Upload Data';
-    if (step === 2) return 'Player Status';
-    if (step === 3) return 'Favorite Player';
-    if (step === 4) return 'Summary';
+    if (upload.step === 1) return 'Upload Data';
+    if (upload.step === 2) return 'Player Status';
+    if (upload.step === 3) return 'Favorite Player';
+    if (upload.step === 4) return 'Summary';
 
     return 'Unknown';
-  }, [step]);
+  }, [upload.step]);
 
   const disabled = useMemo(() => {
     if (upload.error) return true;
     if (!upload.file) return true;
     if (!upload.name) return true;
-    if (step === 3 && !upload.favorite) return true;
+    if (upload.step === 3 && !upload.favorite) return true;
 
     return false;
-  }, [upload, step]);
+  }, [upload]);
 
   const submit = () => {
-    if (step === 4) {
+    if (upload.step === 4) {
       if (upload.file) {
         dispatch(
           teamConfirm({
@@ -72,35 +63,42 @@ const ModalContent = () => {
           }),
         );
         dispatch(clearUpload());
-        dispatch(toggleModal());
       }
     } else {
-      nextStep();
+      dispatch(nextStep());
     }
   };
 
   return (
     <Container>
-      <Steps step={step} error={upload.error} />
+      <Steps error={upload.error} />
 
       <Body>
         <Content>
           <Title>{title}</Title>
           <Contents>
-            {step === 1 && <UploadContent />}
-            {step === 2 && <PlayerContent />}
-            {step === 3 && <FavoriteContent />}
-            {step === 4 && <SummaryContent />}
+            {upload.step === 1 && <UploadContent />}
+            {upload.step === 2 && <PlayerContent />}
+            {upload.step === 3 && <FavoriteContent />}
+            {upload.step === 4 && <SummaryContent />}
           </Contents>
         </Content>
 
         <Buttons>
-          {step > 1 && <Back onClick={previousStep}>Back</Back>}
+          {upload.step > 1 && (
+            <Back
+              onClick={() => {
+                dispatch(prevStep());
+              }}
+            >
+              Back
+            </Back>
+          )}
           {upload.error ? (
             <UploadButton>Re-Upload File</UploadButton>
           ) : (
             <Button onClick={submit} disabled={disabled}>
-              {step === 4 ? 'Confirm' : 'Continue'}
+              {upload.step === 4 ? 'Confirm' : 'Continue'}
             </Button>
           )}
         </Buttons>

@@ -6,6 +6,7 @@ export type FileProps = Array<FileItemProps>;
 
 interface UploadState {
   modal: boolean;
+  step: number;
   file: FileProps | null;
   filename: string;
   error: boolean;
@@ -15,6 +16,7 @@ interface UploadState {
 
 const initialState: UploadState = {
   modal: false,
+  step: 1,
   file: null,
   filename: '',
   error: false,
@@ -28,6 +30,12 @@ export const uploadSlice = createSlice({
   reducers: {
     toggleModal: state => {
       state.modal = !state.modal;
+    },
+    nextStep: state => {
+      state.step += 1;
+    },
+    prevStep: state => {
+      state.step -= 1;
     },
     uploadFinish: (
       state,
@@ -60,6 +68,8 @@ export const uploadSlice = createSlice({
       state.favorite = action.payload;
     },
     clearUpload: state => {
+      state.modal = initialState.modal;
+      state.step = initialState.step;
       state.file = initialState.file;
       state.filename = initialState.filename;
       state.error = initialState.error;
@@ -71,6 +81,8 @@ export const uploadSlice = createSlice({
 
 export const {
   toggleModal,
+  nextStep,
+  prevStep,
   uploadFinish,
   changeName,
   changeStatus,

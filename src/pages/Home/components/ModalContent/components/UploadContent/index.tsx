@@ -77,6 +77,7 @@ const UploadSuccess = () => {
       <Input
         value={upload.name}
         onChange={e => dispatch(changeName(e.target.value))}
+        placeholder="Name"
       />
     </Container>
   );

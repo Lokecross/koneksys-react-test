@@ -11,4 +11,9 @@ export const Container = styled.input`
   width: 100%;
   max-width: 323px;
   -webkit-appearance: none;
+
+  &::placeholder {
+    font-weight: 300;
+    color: #8c8c8c;
+  }
 `;
