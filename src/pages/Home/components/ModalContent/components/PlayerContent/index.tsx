@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 import { selectUpload } from 'store/features/upload/uploadSlice';
 
-import TableScroll from 'components/TableScroll';
+import TableEditable from 'components/TableEditable';
 
 import { Container } from './styles';
 
@@ -11,7 +11,7 @@ const PlayerContent = () => {
 
   return (
     <Container>
-      <TableScroll
+      <TableEditable
         content={
           upload.file?.map(item => ({
             Player: item['Player Name'],

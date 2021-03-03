@@ -36,10 +36,22 @@ export const uploadSlice = createSlice({
     changeName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
+    changeStatus: (
+      state,
+      action: PayloadAction<{ player: string; status: string }>,
+    ) => {
+      const index = state.file?.findIndex(
+        item => item['#'] === action.payload.player,
+      );
+
+      if (state.file) {
+        state.file[index as number].Status = action.payload.status;
+      }
+    },
   },
 });
 
-export const { uploadFinish, changeName } = uploadSlice.actions;
+export const { uploadFinish, changeName, changeStatus } = uploadSlice.actions;
 
 export const selectUpload = (state: RootState) => state.upload;
 
