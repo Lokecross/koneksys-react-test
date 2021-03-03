@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store/app';
 
-export type FileProps = Array<{ [U: string]: string }>;
+export type FileItemProps = { [U: string]: string };
+export type FileProps = Array<FileItemProps>;
 
 interface UploadState {
+  modal: boolean;
   file: FileProps | null;
   filename: string;
   error: boolean;
@@ -12,6 +14,7 @@ interface UploadState {
 }
 
 const initialState: UploadState = {
+  modal: false,
   file: null,
   filename: '',
   error: false,
@@ -23,6 +26,9 @@ export const uploadSlice = createSlice({
   name: 'upload',
   initialState,
   reducers: {
+    toggleModal: state => {
+      state.modal = !state.modal;
+    },
     uploadFinish: (
       state,
       action: PayloadAction<{
@@ -53,14 +59,23 @@ export const uploadSlice = createSlice({
     changeFavorite: (state, action: PayloadAction<string>) => {
       state.favorite = action.payload;
     },
+    clearUpload: state => {
+      state.file = initialState.file;
+      state.filename = initialState.filename;
+      state.error = initialState.error;
+      state.name = initialState.name;
+      state.favorite = initialState.favorite;
+    },
   },
 });
 
 export const {
+  toggleModal,
   uploadFinish,
   changeName,
   changeStatus,
   changeFavorite,
+  clearUpload,
 } = uploadSlice.actions;
 
 export const selectUpload = (state: RootState) => state.upload;

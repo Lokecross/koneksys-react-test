@@ -28,7 +28,7 @@ const TableEditable = ({ content }: TableEditableProps) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState<string | null>(null);
 
-  const options = ['Active', 'Injured', 'Practice', 'Suspended'];
+  const options = ['Active', 'Injuried', 'Practice', 'Suspended'];
 
   return (
     <Container>

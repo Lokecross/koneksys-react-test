@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import uploadSlice from './features/upload/uploadSlice';
+import teamSlice from './features/team/teamSlice';
 
 export const store = configureStore({
   reducer: {
     upload: uploadSlice,
+    team: teamSlice,
   },
 });
 

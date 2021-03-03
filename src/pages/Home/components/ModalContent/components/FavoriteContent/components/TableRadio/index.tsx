@@ -44,7 +44,11 @@ const TableRadio = ({ content }: TableRadioProps) => {
           <Tr
             key={JSON.stringify(item)}
             onClick={() => {
-              dispatch(changeFavorite(item['#']));
+              if (upload.favorite === item['#']) {
+                dispatch(changeFavorite(''));
+              } else {
+                dispatch(changeFavorite(item['#']));
+              }
             }}
           >
             <Td isActive={upload.favorite === item['#']}>
