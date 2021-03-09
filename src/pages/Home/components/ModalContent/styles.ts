@@ -21,7 +21,7 @@ export const Content = styled.div`
 export const Contents = styled.div`
   flex: 1;
   display: grid;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-right: 3px;
   margin-top: 8px;
 
